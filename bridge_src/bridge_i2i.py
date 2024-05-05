@@ -11,7 +11,7 @@ class BridgeImage2Image(bridge_base.BridgeBase):
         # テキストプロンプトはこのタイミングで読み込む
         with open(self.text_prompt_path, 'r') as f:
             text_prompt = yaml.safe_load(f)
-        for level in [ 40, 50, 60, 80]:
+        for level in [ 50, 70, 80, 90]:
             # パラメータ埋め込み(workflowによって異なる処理)
             self.prompt_path["7"]["inputs"]["text"] = ",".join(text_prompt["prompt"])
             self.prompt_path["8"]["inputs"]["text"] = ",".join(text_prompt["negative"])

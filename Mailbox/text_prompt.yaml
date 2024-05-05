@@ -1,7 +1,6 @@
 prompt:
   - "1girl, female lion ear and tail, open mouth, fang, yellow bob hair, sailor school wear"
   - "front view, hands up to face side, wild finger pose, smile"
-  - "closed eyes, joyful"
 negative:
   - "furry, chemo, chibi"
   - "embedding:negativeXL_D"
