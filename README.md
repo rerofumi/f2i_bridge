@@ -22,15 +22,21 @@
     - requests
     - yaml
   - ComfyUI 実行環境
-    - ComfyUI を API 経由で呼び出すので、ComfiUI が動く環境を構築できること
+    - ComfyUI を API 経由で呼び出すので、ComfyUI が動く環境を構築できること
+    - Controlnet を使っているので custom_nodes に必要な拡張ノードを追加する必要がある
+        - 開発環境には以下が入っていた、参考までに(全部は揃えなくて良いかも知れない)
+            - comfyui_controlnet_aux
+            - ComfyUI_essentials
+            - ComfyUI-Advanced-ControlNet
+            - ComfyUI-Manager
 - 各種学習済みモデル
   - ComfyUI のワークフローモデル内で以下を使用
-    - 必要に応じて同じ真名を揃えたり、自分の好みの奴に差し替える
+    - 必要に応じて同じものを揃えたり、自分の好みの奴に差し替える
   - SDXLモデル
     - AnythingXL_xl.safetensors
   - Controlnetモデル
     - sai_xl_canny_256lora.safetensors
-  - embbeding
+  - embedding
     - negativeXL_D.safetensors
     - Text prompt 内で指定する形なので用意しなくても良い
 - その他
@@ -44,18 +50,19 @@
     2. workflow で使っているモデルを ComfyUI の model 下に配置する
 3. f2i_bridge が使うモジュールを必要に応じてインストールする
     ```
-    pip install requests yaml
+    pip install requests pyyaml
     ```
 
 
 ## 使い方
 
-ペイントツールで元画を用意して Mailbox ディレクトリの下に特定のファイル名で保存する。
-しばらく待つと Mailbox ディレクトリの下に画像が生成されるので、それをペイントツールのレイヤーに読み込んで利用する。
+ペイントツールで元画を用意して Mailbox ディレクトリの下に特定のファイル名で保存し、
+しばらく待つと Mailbox ディレクトリの下に画像が生成される。
+生成後それをペイントツールのレイヤーに読み込んで利用する。
 
 ### 起動
 
-1. ComfyUI を起動する、`127.0.0.1:8188` で待ち受けている状態にすること
+1. ComfyUI を `127.0.0.1:8188` で待ち受けている状態で起動すること(通常起動)
 2. ComfyUI GUI は使わないのでブラウザが起動しても、閉じてしまって良い
 3. `python f2i_bridge.py` でブリッジを起動、待ち受け状態にする
 
@@ -110,14 +117,14 @@
 マスク画像は透過PNGで作成すること。
 
 マスク画像 `f2i_mask.png` と入力画像 `f2i_input.png` の両方を置くことで実行される。
-`f2i_input.png` の存在を見て実行が走るので、マスクを先に置いて input の方を後で置くこと。
+`f2i_input.png` の存在を見つけることで実行が開始されるので、マスクを先に置いき input の方を後で置くこと。
 
 ![inpaint sample](/picture/fig_inpaint.png "inpaint generate")
 
 #### Image2Image
 
 mask画像を置かずに `f2i_input.png` のみの設置で通常の i2i 相当を出力する。
-canny より出力のブレが大きく、テキストプロンプトに強く依存する。
+canny に比べて構図のブレが大きく、テキストプロンプトに強く依存する。(以下のサンプル絵は少々わかりにくい)
 
 ![i2i sample](/picture/fig_i2i.png "i2i generate")
 
@@ -149,7 +156,7 @@ negative:
 
 ## ライセンス
 
-MIT licence.
+MIT license.
 
 ## 作者情報
 
