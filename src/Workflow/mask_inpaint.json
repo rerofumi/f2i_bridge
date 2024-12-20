@@ -11,11 +11,12 @@
       ],
       "size": [
         315,
-        317.99999046325684
+        318
       ],
       "flags": {},
       "order": 0,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "MASK",
@@ -23,8 +24,8 @@
           "links": [
             13
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -43,10 +44,10 @@
         385,
         841
       ],
-      "size": {
-        "0": 210,
-        "1": 26
-      },
+      "size": [
+        210,
+        26
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -64,13 +65,14 @@
           "links": [
             14
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
         "Node name for S&R": "InvertMask"
-      }
+      },
+      "widgets_values": []
     },
     {
       "id": 9,
@@ -79,10 +81,10 @@
         717,
         387
       ],
-      "size": {
-        "0": 315,
-        "1": 98
-      },
+      "size": [
+        315,
+        98
+      ],
       "flags": {},
       "order": 6,
       "mode": 0,
@@ -110,8 +112,8 @@
           "links": [
             9
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -122,139 +124,86 @@
       ]
     },
     {
-      "id": 6,
-      "type": "CheckpointLoaderSimple",
+      "id": 1,
+      "type": "LoadImage",
       "pos": [
-        -1,
-        310
+        13,
+        472
       ],
-      "size": {
-        "0": 315,
-        "1": 98
-      },
+      "size": [
+        315,
+        314
+      ],
       "flags": {},
       "order": 1,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
-          "name": "MODEL",
-          "type": "MODEL",
+          "name": "IMAGE",
+          "type": "IMAGE",
           "links": [
-            1,
-            17
+            4
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         },
         {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            5,
-            6
-          ],
-          "shape": 3,
-          "slot_index": 1
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "f2i_input.png",
+        "image"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [
+        2059,
+        137
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 16
         },
         {
-          "name": "VAE",
+          "name": "vae",
           "type": "VAE",
-          "links": [
-            3,
-            11
-          ],
-          "shape": 3,
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CheckpointLoaderSimple"
-      },
-      "widgets_values": [
-        "AnythingXL_xl.safetensors"
-      ]
-    },
-    {
-      "id": 7,
-      "type": "CLIPTextEncode",
-      "pos": [
-        532,
-        -235
-      ],
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 5
+          "link": 11
         }
       ],
       "outputs": [
         {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
+          "name": "IMAGE",
+          "type": "IMAGE",
           "links": [
-            8,
-            18
+            20
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
-      "title": "Prompt\n",
       "properties": {
-        "Node name for S&R": "CLIPTextEncode"
+        "Node name for S&R": "VAEDecode"
       },
-      "widgets_values": [
-        "1girl, female lion ear and tail, open mouth, fang, yellow bob hair, sailor school wear, flont view, hands up to face side, wild finger pose, smile, closed eyes"
-      ]
-    },
-    {
-      "id": 8,
-      "type": "CLIPTextEncode",
-      "pos": [
-        527,
-        9
-      ],
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 6
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "links": [
-            7,
-            19
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "title": "Negative Prompt\n",
-      "properties": {
-        "Node name for S&R": "CLIPTextEncode"
-      },
-      "widgets_values": [
-        "furry, chemo, chibi, embedding:negativeXL_D"
-      ]
+      "widgets_values": []
     },
     {
       "id": 5,
@@ -263,10 +212,10 @@
         1212,
         307
       ],
-      "size": {
-        "0": 315,
-        "1": 262
-      },
+      "size": [
+        315,
+        262
+      ],
       "flags": {},
       "order": 7,
       "mode": 0,
@@ -300,8 +249,8 @@
           "links": [
             15
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -324,10 +273,10 @@
         1630,
         307
       ],
-      "size": {
-        "0": 315,
-        "1": 262
-      },
+      "size": [
+        315,
+        262
+      ],
       "flags": {},
       "order": 8,
       "mode": 0,
@@ -360,8 +309,8 @@
           "links": [
             16
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -378,84 +327,142 @@
       ]
     },
     {
-      "id": 1,
-      "type": "LoadImage",
+      "id": 6,
+      "type": "CheckpointLoaderSimple",
       "pos": [
-        13,
-        472
+        -1,
+        310
       ],
       "size": [
         315,
-        314.00000762939453
+        98
       ],
       "flags": {},
       "order": 2,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
-          "name": "IMAGE",
-          "type": "IMAGE",
+          "name": "MODEL",
+          "type": "MODEL",
           "links": [
-            4
+            1,
+            17
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         },
         {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            5,
+            6
+          ],
+          "slot_index": 1,
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3,
+            11
+          ],
+          "slot_index": 2,
           "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "CheckpointLoaderSimple"
       },
       "widgets_values": [
-        "f2i_input.png",
-        "image"
+        "animagineXLV31_v31.safetensors"
       ]
     },
     {
-      "id": 10,
-      "type": "VAEDecode",
+      "id": 8,
+      "type": "CLIPTextEncode",
       "pos": [
-        2059,
-        137
+        527,
+        9
       ],
-      "size": {
-        "0": 210,
-        "1": 46
-      },
+      "size": [
+        400,
+        200
+      ],
       "flags": {},
-      "order": 9,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
-          "name": "samples",
-          "type": "LATENT",
-          "link": 16
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "link": 11
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
         }
       ],
       "outputs": [
         {
-          "name": "IMAGE",
-          "type": "IMAGE",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
           "links": [
-            20
+            7,
+            19
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
+      "title": "Negative Prompt\n",
       "properties": {
-        "Node name for S&R": "VAEDecode"
-      }
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        true
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        532,
+        -235
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8,
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "Prompt\n",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "1girl",
+        true
+      ]
     },
     {
       "id": 14,
@@ -478,6 +485,7 @@
           "link": 20
         }
       ],
+      "outputs": [],
       "properties": {},
       "widgets_values": [
         "fm_f2i"
@@ -624,6 +632,14 @@
   ],
   "groups": [],
   "config": {},
-  "extra": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": [
+        294.3015842733027,
+        311.73217323461427
+      ]
+    }
+  },
   "version": 0.4
 }

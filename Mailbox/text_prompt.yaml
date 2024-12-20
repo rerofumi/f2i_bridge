@@ -3,4 +3,4 @@ prompt:
   - "front view, hands up to face side, wild finger pose, smile"
 negative:
   - "furry, chemo, chibi"
-  - "embedding:negativeXL_D"
+

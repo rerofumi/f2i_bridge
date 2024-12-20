@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "F2iBridge"
+dynamic = ["version"]
+description = "image2image supporter"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = "MIT"
+dependencies = [
+    "click>=8.1.7",
+    "pillow>=11.0.0",
+    "pyyaml>=6.0.2",
+    "fm-comfyui-bridge>=0.4.2",
+]
+
+[tool.hatch.version]
+path = "src/F2iBridge/__about__.py"
+
+[tool.hatch.build]
+packages = ["src/F2iBridge"]
+include = [
+    "src/Workflow",
+]
+
+[project.scripts]
+F2iBridge = "F2iBridge.F2iBridge:run"
+
+[tool.uv.sources]
+fm-comfyui-bridge = { git = "https://github.com/rerofumi/fm_comfyui_bridge.git" }

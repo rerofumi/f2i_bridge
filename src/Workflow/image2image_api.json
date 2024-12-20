@@ -11,7 +11,7 @@
   },
   "6": {
     "inputs": {
-      "ckpt_name": "AnythingXL_xl.safetensors"
+      "ckpt_name": "animagineXLV31_v31.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
@@ -20,7 +20,8 @@
   },
   "7": {
     "inputs": {
-      "text": "1girl, female lion ear and tail, open mouth, fang, yellow bob hair, sailor school wear",
+      "text": "1girl",
+      "speak_and_recognation": true,
       "clip": [
         "6",
         1
@@ -33,7 +34,8 @@
   },
   "8": {
     "inputs": {
-      "text": "furry, chemo, chibi, embedding:negativeXL_D",
+      "text": "",
+      "speak_and_recognation": true,
       "clip": [
         "6",
         1
@@ -64,7 +66,7 @@
     "inputs": {
       "seed": 1077447761179368,
       "steps": 20,
-      "cfg": 8,
+      "cfg": 5,
       "sampler_name": "euler_ancestral",
       "scheduler": "normal",
       "denoise": 0.8,

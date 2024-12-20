@@ -1,27 +1,4 @@
 {
-  "1": {
-    "inputs": {
-      "control_net_name": "sai_xl_canny_256lora.safetensors",
-      "timestep_keyframe": [
-        "2",
-        1
-      ]
-    },
-    "class_type": "ControlNetLoaderAdvanced",
-    "_meta": {
-      "title": "Load Advanced ControlNet Model 🛂🅐🅒🅝"
-    }
-  },
-  "2": {
-    "inputs": {
-      "base_multiplier": 0.825,
-      "flip_weights": false
-    },
-    "class_type": "ScaledSoftControlNetWeights",
-    "_meta": {
-      "title": "Scaled Soft Weights 🛂🅐🅒🅝"
-    }
-  },
   "3": {
     "inputs": {
       "image": "f2i_input.png",
@@ -58,36 +35,10 @@
       "title": "Preview Image"
     }
   },
-  "6": {
-    "inputs": {
-      "strength": 0.6,
-      "start_percent": 0,
-      "end_percent": 1,
-      "positive": [
-        "8",
-        0
-      ],
-      "negative": [
-        "10",
-        0
-      ],
-      "control_net": [
-        "1",
-        0
-      ],
-      "image": [
-        "4",
-        0
-      ]
-    },
-    "class_type": "ACN_AdvancedControlNetApply",
-    "_meta": {
-      "title": "Apply Advanced ControlNet 🛂🅐🅒🅝"
-    }
-  },
   "8": {
     "inputs": {
-      "text": "",
+      "text": "1girl",
+      "speak_and_recognation": true,
       "clip": [
         "14",
         1
@@ -101,6 +52,7 @@
   "10": {
     "inputs": {
       "text": "",
+      "speak_and_recognation": true,
       "clip": [
         "14",
         1
@@ -113,7 +65,7 @@
   },
   "14": {
     "inputs": {
-      "ckpt_name": "AnythingXL_xl.safetensors"
+      "ckpt_name": "animagineXLV31_v31.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
@@ -122,9 +74,9 @@
   },
   "15": {
     "inputs": {
-      "seed": 97232560230313,
+      "seed": 615935453683263,
       "steps": 20,
-      "cfg": 8,
+      "cfg": 5,
       "sampler_name": "euler_ancestral",
       "scheduler": "normal",
       "denoise": 1,
@@ -133,11 +85,11 @@
         0
       ],
       "positive": [
-        "6",
+        "26",
         0
       ],
       "negative": [
-        "6",
+        "26",
         1
       ],
       "latent_image": [
@@ -193,6 +145,42 @@
     "class_type": "SaveImage",
     "_meta": {
       "title": "Save Image"
+    }
+  },
+  "24": {
+    "inputs": {
+      "control_net_name": "sai_xl_canny_256lora.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "26": {
+    "inputs": {
+      "strength": 0.7000000000000001,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "10",
+        0
+      ],
+      "control_net": [
+        "24",
+        0
+      ],
+      "image": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
     }
   }
 }
