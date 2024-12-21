@@ -23,5 +23,6 @@ class BridgeRewriteLine(bridge_base.BridgeBase):
             self.prompt_path["10"]["inputs"]["text"] = ",".join(text_prompt["negative"])
             self.prompt_path["26"]["inputs"]["strength"] = level / 100
             self.prompt_path["15"]["inputs"]["seed"] = random.randint(1, 10000000000)
+            self.prompt_path["14"]["inputs"]["ckpt_name"] = self.lora_yaml.checkpoint
             # リクエスト送信
             self.generate(self.prompt_path, f"fm_f2i_{index:05d}.png")

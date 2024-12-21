@@ -5,6 +5,7 @@ import random
 import time
 
 import fm_comfyui_bridge.bridge
+import fm_comfyui_bridge.lora_yaml
 import yaml
 
 
@@ -18,6 +19,8 @@ class BridgeBase:
         self.mailbox_path = mailbox_path
         self.input_image_name = "f2i_input.png"
         self.mask_image_name = "f2i_mask.png"
+        self.lora_yaml = fm_comfyui_bridge.lora_yaml.SdLoraYaml()
+        self.lora_yaml.read_from_yaml(os.path.join(mailbox_path, "lora.yaml"))
         random.seed(time.time())
 
     def get_input_image_name(self):

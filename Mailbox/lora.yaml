@@ -1,0 +1,10 @@
+checkpoint: animagineXLV31_v31.safetensors
+image-size:
+  height: 1024
+  width: 1024
+lora:
+- enabled: false
+  model: some-lola-fmodel.safetensors
+  strength: 1
+  trigger: trigger_word
+vpred: false
