@@ -16,41 +16,39 @@
 
 - 実行環境
   - Python
-    - Windows 版の Python 3.10 で作成
-  - python pip モジュール
-    - 以下を使用、pip で予め入れておくか venv を作ってそこの pip で install
-    - requests
-    - yaml
+    - Windows 版の Python 3.10 以上 3.12 以下で作成
+  - uv(astral-sh.uv)
+    - python のプロジェクトマネジメントツール、pip や winget 等のパッケージ管理ツールでインストールしておく
+    - その他必要なモジュールは uv が動作時にインストールする
   - ComfyUI 実行環境
     - ComfyUI を API 経由で呼び出すので、ComfyUI が動く環境を構築できること
-    - Controlnet を使っているので custom_nodes に必要な拡張ノードを追加する必要がある
-        - 開発環境には以下が入っていた、参考までに(全部は揃えなくて良いかも知れない)
-            - comfyui_controlnet_aux
-            - ComfyUI_essentials
-            - ComfyUI-Advanced-ControlNet
-            - ComfyUI-Manager
+
 - 各種学習済みモデル
   - ComfyUI のワークフローモデル内で以下を使用
     - 必要に応じて同じものを揃えたり、自分の好みの奴に差し替える
   - SDXLモデル
     - AnythingXL_xl.safetensors
+    - lora.yaml の中で指定している、他の物を使いたいときは書き換えて使用する
   - Controlnetモデル
     - sai_xl_canny_256lora.safetensors
-  - embedding
-    - negativeXL_D.safetensors
-    - Text prompt 内で指定する形なので用意しなくても良い
+    - ワークフローファイルの中で指定している、書き換えれば変更可能だが基本固定
+
+
 - その他
   - PNGファイルを読み書きできるペイントツール
+
+### ComfyUI の前準備
+
+- `src/Workflow` ディレクトリ内にあるワークフローを読み込ませてエラーが出ない事を確認しておく
+- 標準ノードだけを使用しているはずですが、赤く塗りつぶされたノードがある場合はよしなに解消しておいてください
+
 
 ## インストール方法
 
 1. f2i_bridge のリポジトリを clone する
-2. f2i_bridge の『直下』に ComfyUI を clone して起動する様に整備する
-    1. `./ComfyUI/input`, `./ComfyUI/output` のパスで画像をやりとりするのでパスを合わせること
-    2. workflow で使っているモデルを ComfyUI の model 下に配置する
-3. f2i_bridge が使うモジュールを必要に応じてインストールする
+2. f2i_bridge が使うモジュールを必要に応じてインストールする(省略可能)
     ```
-    pip install requests pyyaml
+    uv sync
     ```
 
 
@@ -64,15 +62,26 @@
 
 1. ComfyUI を `127.0.0.1:8188` で待ち受けている状態で起動すること(通常起動)
 2. ComfyUI GUI は使わないのでブラウザが起動しても、閉じてしまって良い
-3. `python f2i_bridge.py` でブリッジを起動、待ち受け状態にする
+3. `uv run F2iBridge` でブリッジを起動、待ち受け状態にする
+
+#### 起動時オプション
+
+- `-m, --mailbox <path>`: メールボックスディレクトリのパスを指定します。デフォルトは `./Mailbox` です。
+
 
 ### 準備
 
 - これから描きたい絵のテキストプロンプトを `./Mailbox/text_prompt.yaml` に記述する
-    - テキストプロンプトだけでおおよそ求める風貌が出力されているのが望ましい
-- 学習済みモデルを任意の物にしたい時は ComfyUI に設定しておく
-    - Workflow ディレクトリ内の `*_api.json` をエディタで編集し `AnythingXL_xl.safetensors`, `sai_xl_canny_256lora.safetensors` の部分を使いたいモデルで置き換える
-- `embedding` が使いたいときは ComfyUI で設定して、テキストプロンプトの中で指定する
+  - テキストプロンプトだけでおおよそ求める風貌が出力されているのが望ましい
+- 学習済みモデルを任意の物にしたい時は `./Mailbox/lora.yaml` に記述する
+  - lora.yaml 内の checkpoint が使用するモデルの名前
+  - デフォルトでは `animagineXLV31_v31.safetensors` を使用する設定になってる
+  - fm-comfyui-bridge にて LoRA モデルを指定する為なファイルだが f2i_bridge では checkpoint のみ利用する
+    - LoRA モデルを使った生成は今はサポートしていないのでその他の設定は無効
+    - そのうちできるようにしたい意向はあり、そのための準備
+- ControlNet モデルを任意の物にしたい時は ComfyUI に設定しておく
+    - Workflow ディレクトリ内の `*_api.json` をエディタで編集し `sai_xl_canny_256lora.safetensors` の部分を使いたいモデルで置き換える
+
 
 ### 基本的な使い方
 
@@ -83,10 +92,10 @@
   - `f2i_canny.png`
 - 生成が完了すると `./Mailbox/result/` 以下に生成画像が置かれる
 - 生成画像のファイル名は基本以下で固定
-  - `fm_f2i_00001_.png`
-  - `fm_f2i_00002_.png`
-  - `fm_f2i_00003_.png`
-  - `fm_f2i_00004_.png`
+  - `fm_f2i_00001.png`
+  - `fm_f2i_00002.png`
+  - `fm_f2i_00003.png`
+  - `fm_f2i_00004.png`
 - 入力＆生成画像のサイズは基本 1024x1024 pixel
   - 入力画像サイズで出力の大きさが決まるので 1024x1024 以上の非正方形でも大丈夫
 - テキストプロンプトは生成依頼をするタイミングで読みこんでいるので、f2i_bridge を起動したまま編集しても反映される
@@ -164,5 +173,8 @@ rerofumi
 
 ## 変更履歴
 
+- Dec.21.2024
+    - ComfyUI とのやり取りに fm-comfyui-bridge を使う様に変更、f2i_bridge の下にインストールする必要が無くなった
+    - プロジェクト管理を uv に移行、その他最新の環境に
 - May.05.2024
     - first release
