@@ -27,10 +27,10 @@
   - ComfyUI のワークフローモデル内で以下を使用
     - 必要に応じて同じものを揃えたり、自分の好みの奴に差し替える
   - SDXLモデル
-    - AnythingXL_xl.safetensors
+    - `animagineXLV31_v31.safetensors`
     - lora.yaml の中で指定している、他の物を使いたいときは書き換えて使用する
   - Controlnetモデル
-    - sai_xl_canny_256lora.safetensors
+    - `sai_xl_canny_256lora.safetensors`
     - ワークフローファイルの中で指定している、書き換えれば変更可能だが基本固定
 
 
