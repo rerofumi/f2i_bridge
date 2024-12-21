@@ -10,10 +10,8 @@ import F2iBridge.bridge_rewrite_line as bridge_rewrite_line
 
 
 def main(mailbox_path, url):
-    print(mailbox_path)
     # 監視するディレクトリ
     watch_dir = os.path.join(mailbox_path, "request")
-    print(watch_dir)
     #
     strategy_i2i = bridge_i2i.BridgeImage2Image(
         url,
@@ -42,7 +40,6 @@ def main(mailbox_path, url):
     print(f"watch start: {watch_dir}")
     while True:
         time.sleep(1)
-        prepare = False
         processer = None
         # 1. i2i パターン
         # ファイルの確認

@@ -16,24 +16,44 @@ class BridgeBase:
             self.prompt_path = json.load(f)
         self.text_prompt_path = text_prompt_path
         self.mailbox_path = mailbox_path
+        self.input_image_name = "f2i_input.png"
+        self.mask_image_name = "f2i_mask.png"
         random.seed(time.time())
+
+    def get_input_image_name(self):
+        current_time = int(time.time())
+        self.input_image_name = f"f2i_input_{current_time}.png"
+        return self.input_image_name
+
+    def get_mask_image_name(self):
+        current_time = int(time.time())
+        self.mask_image_name = f"f2i_mask_{current_time}.png"
+        return self.mask_image_name
 
     # 画像を準備する
     def prepare_image(self, image=None, mask=None):
         # i2i 画像
         if image is not None:
-            fm_comfyui_bridge.bridge.send_image(image, upload_name="f2i_input.png")
+            fm_comfyui_bridge.bridge.send_image(
+                image, upload_name=self.get_input_image_name()
+            )
             os.remove(image)
         else:
             image = os.path.join(self.mailbox_path, "request/empty_mask.png")
-            fm_comfyui_bridge.bridge.send_image(image, upload_name="f2i_input.png")
+            fm_comfyui_bridge.bridge.send_image(
+                image, upload_name=self.get_input_image_name()
+            )
         # mask 画像
         if mask is not None:
-            fm_comfyui_bridge.bridge.send_image(mask, upload_name="f2i_mask.png")
+            fm_comfyui_bridge.bridge.send_image(
+                mask, upload_name=self.get_mask_image_name()
+            )
             os.remove(mask)
         else:
             mask = os.path.join(self.mailbox_path, "request/empty_mask.png")
-            fm_comfyui_bridge.bridge.send_image(mask, upload_name="f2i_mask.png")
+            fm_comfyui_bridge.bridge.send_image(
+                mask, upload_name=self.get_mask_image_name()
+            )
 
     def generate(self, prompt, filename, output_node="19"):
         id = fm_comfyui_bridge.bridge.send_request(prompt)
@@ -56,6 +76,7 @@ class BridgeBase:
             text_prompt = yaml.safe_load(f)
         for index, level in enumerate([40, 50, 60, 70]):
             # パラメータ埋め込み(workflowによって異なる処理)
+            self.prompt_path["1"]["inputs"]["image"] = self.input_image_name
             self.prompt_path["7"]["inputs"]["text"] = ",".join(text_prompt["prompt"])
             self.prompt_path["8"]["inputs"]["text"] = ",".join(text_prompt["negative"])
             self.prompt_path["13"]["inputs"]["denoise"] = level / 100

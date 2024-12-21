@@ -16,6 +16,7 @@ class BridgeRewriteLine(bridge_base.BridgeBase):
         lineart_prompt = ["monochrome", "line drawing", "simple", "white background"]
         for index, level in enumerate([40, 50, 60, 70]):
             # パラメータ埋め込み(workflowによって異なる処理)
+            self.prompt_path["3"]["inputs"]["image"] = self.input_image_name
             self.prompt_path["8"]["inputs"]["text"] = ",".join(
                 text_prompt["prompt"] + lineart_prompt
             )

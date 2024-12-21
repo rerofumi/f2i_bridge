@@ -15,6 +15,8 @@ class BridgeInpaint(bridge_base.BridgeBase):
             text_prompt = yaml.safe_load(f)
         for index, level in enumerate([40, 50, 60, 80]):
             # パラメータ埋め込み(workflowによって異なる処理)
+            self.prompt_path["1"]["inputs"]["image"] = self.input_image_name
+            self.prompt_path["4"]["inputs"]["image"] = self.mask_image_name
             self.prompt_path["7"]["inputs"]["text"] = ",".join(text_prompt["prompt"])
             self.prompt_path["8"]["inputs"]["text"] = ",".join(text_prompt["negative"])
             self.prompt_path["13"]["inputs"]["denoise"] = level / 100
