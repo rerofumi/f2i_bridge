@@ -16,17 +16,19 @@ dependencies = [
     "fm-comfyui-bridge>=0.4.2",
 ]
 
+[project.scripts]
+F2iBridge = "F2iBridge.F2iBridge:run"
+
 [tool.hatch.version]
 path = "src/F2iBridge/__about__.py"
 
 [tool.hatch.build]
-packages = ["src/F2iBridge"]
-include = [
-    "src/Workflow",
+packages = [
+    "src/F2iBridge",
+    "src/F2iBridgeWorkflow",
 ]
 
-[project.scripts]
-F2iBridge = "F2iBridge.F2iBridge:run"
+[tool.hatch.build.targets.wheel]
+packages = ['F2iBridge', 'F2iBridgeWorkflow']
 
-[tool.uv.sources]
-fm-comfyui-bridge = { git = "https://github.com/rerofumi/fm_comfyui_bridge.git" }
+

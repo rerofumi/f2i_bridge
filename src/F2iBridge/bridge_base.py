@@ -13,7 +13,7 @@ import yaml
 class BridgeBase:
     def __init__(self, url, prompt_path, text_prompt_path, mailbox_path):
         self.url = url
-        with importlib.resources.open_text("Workflow", prompt_path) as f:
+        with importlib.resources.open_text("F2iBridgeWorkflow", prompt_path) as f:
             self.prompt_path = json.load(f)
         self.text_prompt_path = text_prompt_path
         self.mailbox_path = mailbox_path
