@@ -24,11 +24,11 @@ path = "src/F2iBridge/__about__.py"
 
 [tool.hatch.build]
 packages = [
-    "src/F2iBridge",
-    "src/F2iBridgeWorkflow",
+    "src",
+    "Mailbox",
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ['F2iBridge', 'F2iBridgeWorkflow']
+packages = ['src/F2iBridge', 'src/F2iBridgeWorkflow']
 
 
