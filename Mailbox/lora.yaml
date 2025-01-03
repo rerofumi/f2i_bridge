@@ -4,7 +4,7 @@ image-size:
   width: 1024
 lora:
 - enabled: false
-  model: some-lola-fmodel.safetensors
-  strength: 1
-  trigger: trigger_word
+  model: add-detail-xl.safetensors
+  strength: 0
+  trigger: detail
 vpred: false
