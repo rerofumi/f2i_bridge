@@ -33,6 +33,7 @@ class BridgeImage2ImageRefine(bridge_base.BridgeBase):
             self.lora_yaml,
             self.lora_yaml.image_size,
             target,
+            server_url=self.url,
         )
         filename = "fm_f2i_00001.png"
         fm_comfyui_bridge.bridge.save_image(

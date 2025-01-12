@@ -13,7 +13,7 @@ import yaml
 class BridgeBase:
     def __init__(self, url, prompt_path, text_prompt_path, mailbox_path):
         self.url = url
-        with importlib.resources.open_text("F2iBridgeWorkflow", prompt_path) as f:
+        with importlib.resources.open_text("F2iBridge.Workflow", prompt_path) as f:
             self.prompt_path = json.load(f)
         self.text_prompt_path = text_prompt_path
         self.mailbox_path = mailbox_path
@@ -38,31 +38,33 @@ class BridgeBase:
         # i2i 画像
         if image is not None:
             fm_comfyui_bridge.bridge.send_image(
-                image, upload_name=self.get_input_image_name()
+                image, upload_name=self.get_input_image_name(), server_url=self.url
             )
             os.remove(image)
         else:
             image = os.path.join(self.mailbox_path, "request/empty_mask.png")
             fm_comfyui_bridge.bridge.send_image(
-                image, upload_name=self.get_input_image_name()
+                image, upload_name=self.get_input_image_name(), server_url=self.url
             )
         # mask 画像
         if mask is not None:
             fm_comfyui_bridge.bridge.send_image(
-                mask, upload_name=self.get_mask_image_name()
+                mask, upload_name=self.get_mask_image_name(), server_url=self.url
             )
             os.remove(mask)
         else:
             mask = os.path.join(self.mailbox_path, "request/empty_mask.png")
             fm_comfyui_bridge.bridge.send_image(
-                mask, upload_name=self.get_mask_image_name()
+                mask, upload_name=self.get_mask_image_name(), server_url=self.url
             )
 
     def generate(self, prompt, filename, output_node="19"):
-        id = fm_comfyui_bridge.bridge.send_request(prompt)
+        id = fm_comfyui_bridge.bridge.send_request(prompt, server_url=self.url)
         if id:
-            fm_comfyui_bridge.bridge.await_request(1, 3)
-            image = fm_comfyui_bridge.bridge.get_image(id, output_node=output_node)
+            fm_comfyui_bridge.bridge.await_request(1, 3, server_url=self.url)
+            image = fm_comfyui_bridge.bridge.get_image(
+                id, output_node=output_node, server_url=self.url
+            )
             fm_comfyui_bridge.bridge.save_image(
                 image,
                 filename=filename,

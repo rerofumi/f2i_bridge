@@ -84,6 +84,7 @@ pip install F2iBridge
 #### 起動時オプション
 
 - `-m, --mailbox <path>`: メールボックスディレクトリのパスを指定します。デフォルトは `./Mailbox` です。
+- `-h, --host <url>`: 接続する ComfyUI のアドレスURLを指定します。デフォルトは `http://localhost:8188/` です。
 
 
 ### 準備
@@ -196,8 +197,9 @@ MIT license.
 rerofumi
 
 ## 変更履歴
-
-- Jan.03.2025
+- Jan.12.2025 - v0.4.2
+    - `-h, --host`オプションを追加し、ComfyUIのアドレスURLを指定可能に
+- Jan.03.2025 - v0.4.0
     - refine モードを追加
     - PyPI に登録し pip install のみで利用できる様になった
 - Dec.21.2024

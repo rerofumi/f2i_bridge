@@ -81,7 +81,7 @@ wheels = [
 
 [[package]]
 name = "f2ibridge"
-version = "0.3.3"
+version = "0.4.2"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -93,23 +93,23 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8.1.7" },
-    { name = "fm-comfyui-bridge", specifier = ">=0.6.1" },
+    { name = "fm-comfyui-bridge", specifier = ">=0.6.5" },
     { name = "pillow", specifier = ">=11.0.0" },
     { name = "pyyaml", specifier = ">=6.0.2" },
 ]
 
 [[package]]
 name = "fm-comfyui-bridge"
-version = "0.6.1"
+version = "0.6.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pillow" },
     { name = "pyyaml" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d4/37/1a4a3f50fd146c127b229039db5d099fe6d00d94d26f9f64985895fc7dac/fm_comfyui_bridge-0.6.1.tar.gz", hash = "sha256:38a616b5fcc42a011a83af02d9bcee0f988d6f0eae9ae05d6829dac90a00e958", size = 52414 }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/42/64c61cadf92cf09930d3a30997882c0988130bc724a95bb51df336586543/fm_comfyui_bridge-0.6.5.tar.gz", hash = "sha256:b2efe78324613a90bc7a74e91f8ef41363725cdf5f1b12ac4a49896d0055c4f8", size = 51647 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/40/a30c4b1dfb836e7f0cac309af51837b301f3aaf03347d14c4d2d191a19a4/fm_comfyui_bridge-0.6.1-py3-none-any.whl", hash = "sha256:498fc042708656416dd02c15a5de61fcd05bb80b8d4e285f1e34451aea88d955", size = 12727 },
+    { url = "https://files.pythonhosted.org/packages/fb/6a/589651574a49e18d1801d631640c069912e0adbe7584131a4848a6107cf6/fm_comfyui_bridge-0.6.5-py3-none-any.whl", hash = "sha256:da3cd83871465dea372af45f5f47f5bdfce240d760840c6b1b69911b68625eec", size = 38846 },
 ]
 
 [[package]]

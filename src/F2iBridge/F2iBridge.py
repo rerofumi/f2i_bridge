@@ -99,11 +99,11 @@ def main(mailbox_path, url):
     "-m", "--mailbox", default="./MailBox", help="mailBox directory path", type=str
 )
 @click.option(
-    "-u",
-    "--url",
+    "-h",
+    "--host",
     default="http://localhost:8188/",
     help="ComfyUI API address",
     type=str,
 )
-def run(mailbox: str, url: str):
-    main(mailbox, url)
+def run(mailbox: str, host: str):
+    main(mailbox, host)
